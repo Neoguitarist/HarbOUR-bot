@@ -1,3 +1,4 @@
+import os
 import discord
 from discord.ext import commands
 
@@ -47,4 +48,4 @@ async def count_votes(ctx, targetMsgId):
     except discord.NotFound:
         pass
 
-bot.run("MTIwNTEwOTUxMTEwMzMyMDA5NA.GdXEf3.7dwf1CLFW-l8PdLouuFUjlNMUysK5gmHxfLVJc")
+bot.run(os.getenv("TOKEN"))
