@@ -9,10 +9,13 @@ class Config:
 
     def __init__(self):
         self.__appId = None
+        self.__ownerId = None
         self.__botToken = None
 
     @property
     def appId(self): return self.__appId
+    @property
+    def ownerId(self): return self.__ownerId
     @property
     def botToken(self): return self.__botToken
 
@@ -21,5 +24,6 @@ class Config:
         with open(filePath) as file:
             data = json.load(file)
         self.__appId = data["APP_ID"]
+        self.__ownerId = int(data["OWNER_ID"])
         self.__botToken = data["TOKEN"]
         
