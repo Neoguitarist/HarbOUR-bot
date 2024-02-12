@@ -3,7 +3,11 @@ from discord.ext import commands
 from discord import app_commands
 import config
 
-config = config.loadFromFile("config.json")
+try:
+    config = config.loadFromFile("config.2json")
+except Exception as e:
+    print(f"Could not load configuration: {e}.\nStopping here.")
+    exit(1)
 
 msgNotFoundError = "No message has the given identifier."
 

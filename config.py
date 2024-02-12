@@ -18,10 +18,8 @@ class Config:
 
     def reloadFromFile(self, filePath: str):
         data = None
-        try:
-            with open(filePath) as file:
-                data = json.load(file)
-            self.__appId = data["APP_ID"]
-            self.__botToken = data["TOKEN"]
-        except Exception as e:
-            print(f"Could not load configuration: {e}")
+        with open(filePath) as file:
+            data = json.load(file)
+        self.__appId = data["APP_ID"]
+        self.__botToken = data["TOKEN"]
+        
