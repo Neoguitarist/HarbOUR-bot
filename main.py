@@ -4,7 +4,7 @@ from discord import app_commands
 import config
 
 try:
-    config = config.loadFromFile("config.2json")
+    config = config.loadFromFile("config.json")
 except Exception as e:
     print(f"Could not load configuration: {e}.\nStopping here.")
     exit(1)
