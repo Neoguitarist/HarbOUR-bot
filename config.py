@@ -23,7 +23,7 @@ class Config:
         data = None
         with open(filePath) as file:
             data = json.load(file)
-        self.__appId = data["APP_ID"]
+        self.__appId = int(data["APP_ID"])
         self.__ownerId = int(data["OWNER_ID"])
         self.__botToken = data["TOKEN"]
         
