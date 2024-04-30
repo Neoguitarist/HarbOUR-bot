@@ -16,6 +16,7 @@ emoji3 = "3️⃣"
 emoji4 = "4️⃣"
 emoji5 = "5️⃣"
 emojiCheck = "✅"
+emojiRedCross = "❌"
 voteEmojis = [emoji0, emoji1, emoji2, emoji3, emoji4, emoji5]
 watchedRoleId = 1162008885725511790
 propositionHistoryDaySpan = datetime.timedelta(days=30)
@@ -60,9 +61,10 @@ async def fistof5missingme(interaction: discord.Interaction):
         isProposition = False
         voteFound = False
         for reaction in message.reactions:
-            # Consider messages with a check mark as voted,
-            # since the possible proposition is already accepted.
-            if (reaction.emoji == emojiCheck):
+            # Consider messages with a check mark or red cross as voted,
+            # since the possible proposition is already closed (accepted or rejected).
+            if (reaction.emoji == emojiCheck
+                or reaction.emoji == emojiRedCross):
                 voteFound = True
                 break
             if (reaction.emoji in voteEmojis):
