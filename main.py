@@ -97,6 +97,27 @@ async def fistof5setup(interaction: discord.Interaction, msgid: str):
     except discord.HTTPException as e:
         print(e)
 
+@bot.tree.command(name="fistof5recall",
+    description="Send a message to members have not voted on this Fist of Five poll yet.")
+@app_commands.describe(msgid="Identifier of the target message.")
+async def fistof5recall(interaction: discord.Interaction, msgid: str):
+    print(f"Sending recalls to non-voters on the Fist of Five poll of message with ID {msgid}.")
+    targetMsgId = discordUtils.parseIdentifier(msgid)
+    if targetMsgId is None:
+        await interaction.response.send_message(content=invalidIdError, ephemeral=True)
+        return
+    await interaction.response.defer(thinking=True, ephemeral=True)
+    try:
+        targetMsg = await interaction.channel.fetch_message(targetMsgId)
+    except discord.NotFound:
+        await interaction.followup.send(content=msgNotFoundError, ephemeral=True)
+        return
+    try:
+        response = await fistof5.fistof5recall(interaction, targetMsg)
+        await interaction.followup.send(content=response, ephemeral=True)
+    except discord.HTTPException as e:
+        print(e)
+
 @bot.tree.command(name="fistof5missingme",
     description="Display links to all propositions waiting for your vote.")
 async def fistof5missingme(interaction: discord.Interaction):
