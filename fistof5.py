@@ -58,12 +58,13 @@ async def fistof5recall(interaction: discord.Interaction, message: discord.Messa
     watchedUserIds = set([u.id for u in watchedUsers])
     watchedUsers.sort(key=lambda u: u.display_name)
     noReactionUserIds = set([u.id for u in watchedUsers])
+    outputMsg = ""
     for reaction in message.reactions:
         if (reaction.emoji in voteEmojis):
             reactionUsers = [u async for u in reaction.users() if u.id in watchedUserIds]
             noReactionUserIds -= set([u.id for u in reactionUsers])
     for userId in noReactionUserIds:
-        interaction.guild.get_member(userId).send(f"This is a recall for you to vote on [this Fist of Five poll]({message.jump_url}). ;)")
+        await interaction.guild.get_member(userId).send(f"This is a recall for you to vote on [this Fist of Five poll]({message.jump_url}). ;)")
     if any(noReactionUserIds):
         outputMsg += "**Recalls sent to: ** " + ", ".join([u.display_name for u in watchedUsers if u.id in noReactionUserIds])
     else:

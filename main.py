@@ -142,5 +142,12 @@ async def fistof5setupmenu(interaction: discord.Interaction, message: discord.Me
     await interaction.response.defer(thinking=True, ephemeral=True)
     response = await fistof5.fistof5count(interaction, message)
     await interaction.followup.send(content=response, ephemeral=True)
+
+@bot.tree.context_menu(name="Fist of 5 - Recall")
+async def fistof5countmenu(interaction: discord.Interaction, message: discord.Message):
+    print(f"Sending a recall about the Fist of Five poll on message with ID {message.id}.")
+    await interaction.response.defer(thinking=True, ephemeral=True)
+    response = await fistof5.fistof5recall(interaction, message)
+    await interaction.followup.send(content=response, ephemeral=True)
   
 bot.run(appConfig.botToken)
